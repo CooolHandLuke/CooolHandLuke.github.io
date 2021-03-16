@@ -165,7 +165,7 @@ if(stringOne.length > stringTwo.length) {
 }
 
 /**
- * Given two Strings, return -1 if the first is higher in alphabetical order than
+ * Given two Strings, return 1 if the first is higher in alphabetical order than
  * the second, return 1 if the second is higher in alphabetical order than the
  * first, and return 0 if they're equal.
  *
