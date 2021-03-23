@@ -26,7 +26,6 @@ function valuesToString(object) {
 // in a string each separated with a space
     var arr = [];
     var a = Object.values(object);
-  // var x = a.join(' ').split(' ');
    
   for(var i = 0; i < a.length; i++) {
     if(typeof a[i] === 'string') {
@@ -101,10 +100,13 @@ function profileInfo(object) {
 //////////////////////////////////////////////////////////////////////
 
 function maybeNoises(object) {
+    //if the property does not exist, return string
  if(!object.noises) {
      return "there are no noises";
+    //if property exists, but has no values, return string
  } else if(object.noises.length === 0) {
      return "there are no noises";
+    //otherwise take the noises property and concat the values into a string
 } else {
     return object.noises.join(' ');
 }
@@ -115,6 +117,8 @@ function maybeNoises(object) {
 //////////////////////////////////////////////////////////////////////
 
 function hasWord(string, word) {
+    //.includes returns a boolean value, if the word argument 
+    // is string inside string argument, it will return true, otherwise false
 return string.includes(word);
 }
 
@@ -123,6 +127,7 @@ return string.includes(word);
 //////////////////////////////////////////////////////////////////////
 
 function addFriend (name, object) {
+//using dot notation find friends property and add name to the friends array
 object.friends.push(name);
 return object;
 }
@@ -132,9 +137,11 @@ return object;
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
+    //if the object does not contain a friends property, return false
 if(!object.friends) {
     return false;
 } else {
+    //return the boolean result 
 return object.friends.includes(name);
 }
 }
@@ -144,12 +151,18 @@ return object.friends.includes(name);
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
+    //declare a variable set to an empty array
 var nonFriends = [];
+//looop through the array 
 for(var i = 0; i < array.length; i ++) {
+//for each index of array, check if BOTH name property does not equal the name argument
+//AND the current index object does not have the name on the array of friends
     if(array[i].name !== name && !array[i].friends.includes(name)) {
+        //if both are true, add the name string to nonFriends
         nonFriends.push(array[i].name);
     }
 }
+//return the nonFriends array
 return nonFriends;
 }
 
@@ -158,9 +171,12 @@ return nonFriends;
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
+    //check to see is the key param is NOT a property on object
 if(!object.key === value) {
+    //if not there, create the property on object
      object.key = value;
 } else {
+    //if it does exist, update the value on the property
    object[key] = value;
 }
 return object;
@@ -171,9 +187,11 @@ return object;
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
+    //loop through array of strings and delete any properties that match the current indexed string from array
     for(var i = 0; i < array.length; i++) {
         delete object[array[i]];
 }
+//return the object
 return object;
 }
 
