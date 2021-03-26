@@ -75,26 +75,43 @@ var names = _.filter(array, function(customerObj) {
 return names.length;
 };
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = function(array, customer, letter) {
+    
+};
 
-var friendsCount;
+var friendsCount = function(array, name) {
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+        var friends = array[i].friends;
+        for (var j = 0; j < friends.length; j++) {
+            if (friends[j].name === name) {
+                result.push(array[i].name);
+            }
+        }
+    }
+    return result;
+};
 
 var topThreeTags = function(array) {
- };
-
-var genderCount = function(array) {
-  return _.reduce(array, function(resultObj, customerObj) {
-      //if resultObj has the key for the objects gender
-      //if so, add to that count
-      if(resultObj[customerObj.gender]) {
-          resultObj[customerObj.gender] += 1;
-       //if not, create new key/value pair for that gender
-        } else {
-        resultObj[customerObj.gender] = 1;
-        }
-     return resultObj;
-  }, {});
-};
+ var tagsArr = [];
+  for(var i = 0; i < array.length; i++) {
+   tagsArr.push(array[i].tags);
+}
+var tagsCountObj = tagsArr.flat().reduce(function(finalObj, currentTag) {
+      if(finalObj[currentTag]) {
+        finalObj[currentTag] ++;
+    }else {
+      finalObj[currentTag] = 1;
+    } return finalObj;
+    }, {});
+var finalTopArr = [];
+var topThreeArr = Object.entries(tagsCountObj).sort(function(a,b){return b[1] - a[1];}).slice(0, 3);
+for(var j = 0; j < topThreeArr.length; j++) {
+  
+  finalTopArr.push(topThreeArr[j][0])
+}
+return finalTopArr;
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

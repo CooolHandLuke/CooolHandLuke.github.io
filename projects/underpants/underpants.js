@@ -75,12 +75,15 @@ _.typeOf = function(value) {
 */
 
 _.first = function(array, number) {
+    //check if array arugment is array and number argument is not negative
     if(!Array.isArray(array) || Math.sign(number) === -1) {
         return [];
     }
+    //check if number arg is not a number or is not passed into function
     if (number === undefined || isNaN(number)) {
         return array[0];
     }
+    //return the array arguments values beginning at the first value and ending at the number arg given
     return array.slice(0,number);
 }
 
@@ -102,12 +105,15 @@ _.first = function(array, number) {
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 _.last = function(array, number) {
+    //check if array is an array and number is not a negative number
     if(!Array.isArray(array) || Math.sign(number) === -1) {
         return [];
     }
+    //check i fnumber is not given or is not a number
     if (number === undefined || isNaN(number)) {
         return array[array.length - 1];
     }
+    //return values from the end of the array, counting back to number
     return array.slice(-number);
 };
 
@@ -129,7 +135,9 @@ _.last = function(array, number) {
 */
 
 _.indexOf = function(array, value) {
+    //loop through each value in array
     for (var i = 0; i < array.length; i++) {
+    //if the current value is absolutely equal to the value arg return i, the current index of array
         if(array[i] === value) {
             return i;
         } 
@@ -150,6 +158,7 @@ _.indexOf = function(array, value) {
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 _.contains = function(array, value) {
+    //return true of false based on using .includes, checking if the value arg is a value inside of the array arg
         return (array.includes(value)) ? true : false;
 }
 
@@ -170,11 +179,15 @@ _.contains = function(array, value) {
 */
 
 _.each = function(collection, func) {
+    //check if collection is an array
     if(Array.isArray(collection)) {
+    //if an array, loop through each value in arrray
         for(var i = 0; i < collection.length; i++) {
+    //call func arg on the current value of collection arg, it's index, and the collection arg
        func(collection[i], i, collection);
         }
     } else {
+    //else we are assuming the collection is an object and looping through it to apply func to every value
         for(var key in collection) {
             func(collection[key], key, collection);
         }
@@ -193,6 +206,7 @@ _.each = function(collection, func) {
 */
 _.unique = function(array) {
       let newArr = [];
+      //loop over. every value in array and if the current value of array is NOT inside of the newArr, push it into the newArr
     for (let i = 0; i < array.length; i++){
         if (newArr.indexOf(array[i]) === -1){
             newArr.push(array[i]);
@@ -218,6 +232,7 @@ _.unique = function(array) {
 */
 _.filter = function(arr, func) {
     var newArr =[];
+    //loop over arr arg and call func arg on each value, index and arr arg, and add the values that return true to the newArr
    for(var i = 0; i < arr.length; i++){
    if(func(arr[i],i,arr)) {
        newArr.push(arr[i]);
@@ -239,6 +254,7 @@ _.filter = function(arr, func) {
 */
 _.reject = function(arr, func) {
     var newArr =[];
+    //loop over every value in arr and pass each into func, and add the values that return false to the newArr
    for(var i = 0; i < arr.length; i++){
    if(!func(arr[i],i,arr)) {
        newArr.push(arr[i]);
@@ -265,10 +281,14 @@ _.reject = function(arr, func) {
 }
 */
 _.partition = function(array, func) {
+    //create a variable set to an empty array with two empty sub-arrays
     var trueAndFalseArr = [[],[]];
+    //looop through the array arg and pass the values into the func arg
     for(var i = 0; i <= array.length - 1; i++) {
+        //if the result of running func on the current value is true, add it to the first sub array
         if(func(array[i], i, array) == true) {
             trueAndFalseArr[0].push(array[i]);
+        //if false, add the current value to the second sub-array
         } else {
             trueAndFalseArr[1].push(array[i]);
         }
@@ -314,6 +334,7 @@ _.map = function(collection, func) {
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 _.pluck = function(array, prop) {
+    //loop through each value in inside of the objects in the array arg, and return the values input into a new array
     return _.map(array, function(object,i, arr) {
         return object[prop];
     });
@@ -342,9 +363,12 @@ _.pluck = function(array, prop) {
 
 
 _.every = function(collection, func){
+    //create variable set to the value of true
     let bool = true;
+    //loop through each element in the collection arg
     _.each(collection, function(element, i, collection){
         if(func !== undefined){
+    //if any of the values ran through thr func arg return false, the value of bool becomes false
             if(func(element, i, collection) === false){
                 bool = false;
             }
