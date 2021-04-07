@@ -6,12 +6,16 @@
 * Boolean, Array, Object or another data-type.  Variables are called so because once created, we
 * can CHANGE the value (and type of value) to which they point.
 *
+*
+*
 * 1. To create a variable we use the keyword, var, let or const followed by a name (id or alias) for our
 * variable. 
-*   -var has a global scope, meaning it can be accessed by any code blocks it is outside of, though if declared
+*   -VAR has a global scope, meaning it can be accessed by any code blocks it is outside of, though if declared
 *       inside a code block, it is only available there. var can aslo be re-declared. It can be delcared without a value.
-*   -let variables can be updated, but they can not be re-declared like var.It can be delcared without a value as well.
-*   -const variables cannot be updated or re-declared. It cannot be delcared without a value.
+*   -LET variables can be reassigned, but they can not be re-declared like var. Let variables can be declared without a value as well.
+*   -CONST variables cannot be reassigned or re-declared. Const variables cannot be declared without a value. 
+*
+*
 *
 *2. Variables are hoisted in a specific way. Hoisting is the term used to describe in what order code is ran. 
 * After being declared and assigned in Javascript, variables are called upon when code is ran. The variable names
@@ -20,6 +24,17 @@
 *
 * 3. There are 2 phases of using variables: declaration and initialization (or assignment).
 */
+
+/**
+ * HOISTING
+ * -Javascript moves all declaration of variables to the top of the current code being ran, 
+ *   or to the top of a function code block.
+ * 
+ * -variables defined with VAR are hoisted to the top and initialized.
+ * -Variables defined with LET and CONST are hoisted to the top of the block, but not initialized. This means that the block of code knows of the variable declared with LET and CONST, 
+ *   but it's unavailable until it has been declared later in ther code.
+ */
+
 
 // 1. declaration //
 var myName;
@@ -43,12 +58,3 @@ var myVariable = 1;
 var myVariable = true;
 myVariable = "someString";
 
-/**
- * HOISTING
- * Javascript moves all declaration of variables to the top of the current code being ran, 
- * or to the top of a function code block.
- * 
- * variables defined with var are hoisted to the top and initialized.
- * Variables defined with let and const are hoisted to the top of the block, but not initialized.
- * this means that the block of code knows of the variable, but it's unavailable until it has been declared later in ther code.
- */

@@ -74,11 +74,11 @@ var range = function(x, y, outputRange = []) {
   }
   //Recursive case
   if(x > y) {
-    outputRange.push(x - 1)
+    outputRange.push(x - 1);
     return range(x - 1, y, outputRange);
   }
   outputRange.push(x + 1);
-  return range(x + 1, y, outputRange)
+  return range(x + 1, y, outputRange);
 };
 
 // 7. Compute the exponent of a number.
@@ -152,13 +152,18 @@ var modulo = function(x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function(x, y, max) {
+var multiply = function(x, y) {
+  if(y === 0){
+    return 0;
+  }
+  if(x < 0){
+    return -multiply(-x, y);
+  }
+  if(y < 0){
+    return -multiply(x, -y);
+  }
+  return (x + multiply(x, y - 1));
 
-  if(y === 0) {
-    return max;
-  } 
-  max += x;
-  return multiply(x , y - 1, max);
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
@@ -342,8 +347,25 @@ var letterTally = function(str, obj) {
 // elements should not be changed.
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
-var compress = function(list) {
-};
+var compress = function(list, arr = []) {
+  //base case
+  //if list is empty, return default arr param
+        if (list.length === 0) {
+            return arr;
+        } 
+  //if list has only one number left in its array, add it to arr 
+        if (list.length === 1) {
+            arr.push(list[0]);
+            return arr;
+        }
+  //if the first index or list is NOT equal to the second index add the first index to arr
+        if (list[0] !== list[1]) {
+            arr.push(list[0])
+        }
+  //recursive case
+  //call function with list, slicing off the first index, along with calling arr
+        return compress(list.slice(1), arr);
+    };
 
 // 32. Augment every element in a list with a new value where each element is an array
 // itself.
@@ -378,8 +400,7 @@ var alternateSign = function(array) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
-    //create an object with num: value pair
-    var myObj = {
+    var numObj = {
         1: 'one',
         2: 'two',
         3: 'three',
@@ -391,8 +412,21 @@ var numToText = function(str) {
         9: 'nine',
         0: 'zero'
     };
-  
 
+    var result = "";
+
+    if (str.length === 0) {
+        return result;
+    } else {
+        if(numObj[str.charAt(0)]) {
+        result = result + numObj[str.charAt(0)]
+    }
+        else {
+        result = result + str.charAt(0);
+    }
+        return result + numToText(str.slice(1));
+    }
+   
 };
 
 // *** EXTRA CREDIT ***
